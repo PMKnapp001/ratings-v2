@@ -2,6 +2,7 @@
 
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+import crud
 
 db = SQLAlchemy()
 
@@ -42,7 +43,7 @@ class Movie(db.Model):
     def __repr__(self):
         """Display movie info."""
 
-        return f"<Movie ID = {self.movie_id}, Title = {self.title}, Released = {self.release_date}>"    
+        return f"<movie_id = {self.movie_id}, title = {self.title}, release_date = {self.release_date}>"    
                         
                         
 class Rating(db.Model):
@@ -61,13 +62,13 @@ class Rating(db.Model):
     def __repr__(self):
         """Display rating info."""
 
-        return f"<Rating ID = {self.rating_id}, Score = {self.score}, Movie ID = {self.movie_id}>"
+        return f"<rating_id = {self.rating_id}, score = {self.score}, movie_id = {self.movie_id}>"
     
 
 
 def connect_to_db(flask_app, db_uri="postgresql:///ratings", echo=True):
     flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
-    flask_app.config["SQLALCHEMY_ECHO"] = echo
+    # flask_app.config["SQLALCHEMY_ECHO"] = echo
     flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     db.app = flask_app
@@ -84,3 +85,6 @@ if __name__ == "__main__":
     # query it executes.
 
     connect_to_db(app)
+
+
+
